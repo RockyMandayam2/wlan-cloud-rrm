@@ -10,7 +10,8 @@ package com.facebook.openwifirrm.ucentral.informationelement;
 
 import java.util.Objects;
 
-import com.google.gson.JsonElement;
+import com.facebook.openwifirrm.ucentral.IEUtils;
+
 import com.google.gson.JsonObject;
 
 /**
@@ -53,28 +54,26 @@ public class TxPwrInfo {
 			contents.get("Local Max Tx Pwr Constraint 20MHz").getAsInt();
 		// optional field
 		Integer localMaxTxPwrConstraint40MHz =
-			parseOptionalField(contents, "Local Max Tx Pwr Constraint 40MHz");
+			IEUtils.parseOptionalIntField(
+				contents,
+				"Local Max Tx Pwr Constraint 40MHz"
+			);
 		Integer localMaxTxPwrConstraint80MHz =
-			parseOptionalField(contents, "Local Max Tx Pwr Constraint 40MHz");
+			IEUtils.parseOptionalIntField(
+				contents,
+				"Local Max Tx Pwr Constraint 40MHz"
+			);
 		Integer localMaxTxPwrConstraint160MHz =
-			parseOptionalField(contents, "Local Max Tx Pwr Constraint 40MHz");
+			IEUtils.parseOptionalIntField(
+				contents,
+				"Local Max Tx Pwr Constraint 40MHz"
+			);
 		return new TxPwrInfo(
 			localMaxTxPwrConstraint20MHz,
 			localMaxTxPwrConstraint40MHz,
 			localMaxTxPwrConstraint80MHz,
 			localMaxTxPwrConstraint160MHz
 		);
-	}
-
-	private static Integer parseOptionalField(
-		JsonObject contents,
-		String fieldName
-	) {
-		JsonElement element = contents.get(fieldName);
-		if (element == null) {
-			return null;
-		}
-		return element.getAsInt();
 	}
 
 	@Override
